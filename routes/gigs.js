@@ -1,62 +1,64 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const db = require('../config/database');
-const Gig = require('../models/Gig');
-const Sequelize = require('sequelize');
+const db = require("../config/database");
+const Gig = require("../models/Gig");
+const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
-//get did list
-router.get('/', (req, res) =>
+// Get gig list
+router.get("/", (req, res) =>
   Gig.findAll()
-    .then(gigs => res.render('gigs', {
-      gigs
-    }))
-    .catch(err => console.log(err)));
+    .then(gigs =>
+      res.render("gigs", {
+        gigs
+      })
+    )
+    .catch(err => console.log(err))
+);
 
-//display add gig form
-router.get('/add', (req, res) => res.render('add'));
+// Display add gig form
+router.get("/add", (req, res) => res.render("add"));
 
-
-
-//add a gig 
-router.post('/add', (req, res) => {
-
+// Add a gig
+router.post("/add", (req, res) => {
   let { title, technologies, budget, description, contact_email } = req.body;
   let errors = [];
-  //validate fields
+
+  // Validate Fields
   if (!title) {
-    errors.push({ text: 'Please add a title' });
+    errors.push({ text: "Please add a title" });
   }
   if (!technologies) {
-    errors.push({ text: 'Please add some technologies' });
+    errors.push({ text: "Please add some technologies" });
   }
   if (!description) {
-    errors.push({ text: 'Please add a description' });
+    errors.push({ text: "Please add a description" });
   }
   if (!contact_email) {
-    errors.push({ text: 'Please add a contact email' });
+    errors.push({ text: "Please add a contact email" });
   }
 
-  //check for errors
+  // Check for errors
   if (errors.length > 0) {
-    res.render('add', {
+    res.render("add", {
       errors,
       title,
       technologies,
-      description,
       budget,
+      description,
       contact_email
-    })
+    });
   } else {
-
     if (!budget) {
-      budget = 'Unknown';
+      budget = "Unknown";
     } else {
       budget = `$${budget}`;
     }
-    //make lowercase and move space after comma
-    technologoies = technologies.toLowerCase().replace(/, /g, ',');
-    //inset into table
+
+    // Make lowercase and remove space after comma
+    technologies = technologies.toLowerCase().replace(/, /g, ",");
+
+    // Insert into table
     Gig.create({
       title,
       technologies,
@@ -64,21 +66,20 @@ router.post('/add', (req, res) => {
       budget,
       contact_email
     })
-      .then(gig => res.redirect('/gigs'))
-      .catch(err => console.log(err))
+      .then(gig => res.redirect("/gigs"))
+      .catch(err => console.log(err));
   }
 });
 
-
-// search for gigs
-router.get('/search', (req, res) => {
+// Search for gigs
+router.get("/search", (req, res) => {
   let { term } = req.query;
 
   // Make lowercase
   term = term.toLowerCase();
 
-  Gig.findAll({ where: { technologies: { [Op.like]: '%' + term + '%' } } })
-    .then(gigs => res.render('gigs', { gigs }))
+  Gig.findAll({ where: { technologies: { [Op.like]: "%" + term + "%" } } })
+    .then(gigs => res.render("gigs", { gigs }))
     .catch(err => console.log(err));
 });
 
