@@ -1,5 +1,5 @@
 
-const express = require('express');
+var express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
