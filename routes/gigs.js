@@ -71,6 +71,10 @@ router.post("/add", (req, res) => {
   }
 });
 
+
+
+
+
 // Search for gigs
 router.get("/search", (req, res) => {
   let { term } = req.query;
