@@ -1,4 +1,4 @@
-// const express = require('express');
+const express = require('express');
 const router = express.Router();
 const db = require('../config/database');
 const Gig = require('../models/Gig');
@@ -68,6 +68,7 @@ router.post('/add', (req, res) => {
       .catch(err => console.log(err))
   }
 });
+
 
 // search for gigs
 router.get('/search', (req, res) => {
