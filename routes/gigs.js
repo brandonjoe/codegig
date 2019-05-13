@@ -4,9 +4,9 @@ const db = require("../config/database");
 const Gig = require("../models/Gig");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
-
 // Get gig list
 router.get("/", (req, res) =>
+
   Gig.findAll()
     .then(gigs =>
       res.render("gigs", {
@@ -14,6 +14,7 @@ router.get("/", (req, res) =>
       })
     )
     .catch(err => console.log(err))
+    
 );
 
 // Display add gig form
