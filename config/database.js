@@ -3,9 +3,10 @@
 const Sequelize = require('sequelize');
 
 module.exports = new Sequelize(process.env.HEROKU_POSTGRESQL_MAUVE_URL, {
-  dialect: 'postgres',
+  dialect:  'postgres',
   protocol: 'postgres',
-  dialectOptions: {
-      ssl: true
+  port:     match[4],
+  host:     match[3],
+  logging:  true //false
   }
-});
+);

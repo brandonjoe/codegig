@@ -2,7 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
-
+const app = express();
 // Database
 const db = require('./config/database');
 
@@ -11,7 +11,7 @@ db.authenticate()
   .then(() => console.log('Database connected...'))
   .catch(err => console.log('Error: ' + err))
 
-const app = express();
+
 
 // Handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
