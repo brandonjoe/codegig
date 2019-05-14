@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => res.render('index', { layout: 'landing' }));
 
 // Gig routes
-app.use('/gigs', require('./routes/gigs'));
+app.use('/gigsss', require('./routes/gigs'));
 
 const PORT = process.env.PORT || 5000;
 
