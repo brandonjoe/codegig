@@ -6,7 +6,7 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
 // Get gig list
-router.get("/gigs", (req, res) =>
+router.get("/", (req, res) =>
 
   Gig.findAll()
     .then(gigs =>
