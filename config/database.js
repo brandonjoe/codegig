@@ -2,7 +2,7 @@
 
 const Sequelize = require('sequelize');
 
-module.exports = new Sequelize(process.env.HEROKU_POSTGRESQL_MAUVE_URL, {
+module.exports = new Sequelize(process.env.DATABASE_URL, {
   dialect:  'postgres',
   protocol: 'postgres',
   port:     match[4],
