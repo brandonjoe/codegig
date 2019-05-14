@@ -19,4 +19,15 @@ const Gig = db.define('gig', {
   }
 })
 
+Gig.sync({ force: true }).then(() => {
+  
+  return Gig.create({
+    Title: 'John',
+    technologies: 'Hancock',
+    description: 'react',
+    budget: '1000',
+    contact_email: 'user2312@gmail.com'
+     
+  });
+});
 module.exports = Gig;
